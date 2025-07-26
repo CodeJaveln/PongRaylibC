@@ -1,5 +1,7 @@
 #include "raylib/raylib.h"
 
+// Litet test för att se så allt fungerar:
+
 int main() {
     const int screenWidth = 800, screenHeight = 450;
 
