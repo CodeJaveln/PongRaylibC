@@ -12,7 +12,7 @@ CFLAGS := -Wall -Werror -Iinclude -std=c99 -MMD -MP $(DEBUGFLAGS)
 ifeq ($(OS),Windows_NT)
 	LDFLAGS := -Llibraries/win64 -lraylib -lopengl32 -lgdi32 -lwinmm 
 else
-	LDFLAGS := -Llibraries/linux64
+	LDFLAGS := -Llibraries/linux64 -lraylib -lm -ldl -lpthread -lGL -lrt -lX11
 endif
 
 all: $(TARGET)
