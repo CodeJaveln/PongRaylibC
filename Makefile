@@ -8,7 +8,12 @@ OBJ := $(patsubst src/%.c,build/%.o,$(C_SRC))
 
 DEBUGFLAGS := -DDEBUG -g -O0
 CFLAGS := -Wall -Werror -Iinclude -std=c99 -MMD -MP $(DEBUGFLAGS)
-LDFLAGS := -Llibraries -lraylib -lm -lpthread -ldl -lrt -lGL
+
+ifeq ($(OS),Windows_NT)
+	LDFLAGS := -Llibraries/win64 -lraylib -lopengl32 -lgdi32 -lwinmm 
+else
+	LDFLAGS := -Llibraries/linux64
+endif
 
 all: $(TARGET)
 
@@ -23,15 +28,10 @@ build/%.o: src/%.c
 
 run: all
 ifeq ($(OS),Windows_NT)
-	$(TARGET).exe
+	./$(TARGET).exe
 else
 	./$(TARGET)
 endif
 
 clean:
-ifeq ($(OS),Windows_NT)
-	del /Q /S build >nul 2>&1
-	del $(TARGET).exe >nul 2>&1
-else
 	rm -rf build $(TARGET)
-endif
