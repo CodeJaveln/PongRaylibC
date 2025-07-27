@@ -3,7 +3,7 @@
 #include "render.h"
 
 int main() {
-    const int screenWidth = 800, screenHeight = 450;
+    const int screenWidth = 1920, screenHeight = 1080;
 
     InitWindow(screenWidth, screenHeight, "Hello, World!");
 
