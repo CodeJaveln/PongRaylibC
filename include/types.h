@@ -3,6 +3,7 @@
 
 #define PLAYER_HEIGHT 30
 #define PLAYER_WIDTH 10
+#define PLAYER_OFFSET 0.036f
 
 #define BALL_SIZE 10
 #define BALL_SPEED 150.0f
