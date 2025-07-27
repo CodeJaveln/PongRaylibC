@@ -1,7 +1,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#define PLAYER_HEIGHT 30
+#define PLAYER_HEIGHT 80
 #define PLAYER_WIDTH 10
 #define PLAYER_OFFSET 0.036f
 
