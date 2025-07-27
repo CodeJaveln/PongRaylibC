@@ -9,7 +9,7 @@ int main() {
 
     SetTargetFPS(60);
 
-    GameState gameState;
+    GameState gameState = {0};
 
     while (!WindowShouldClose()) {
         Update(&gameState);
