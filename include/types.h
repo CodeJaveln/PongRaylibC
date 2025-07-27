@@ -1,7 +1,11 @@
 #ifndef TYPES_H
 #define TYPES_H
+
 #define PLAYER_HEIGHT 30
 #define PLAYER_WIDTH 10
+
+#define BALL_SIZE 10
+#define BALL_SPEED 150.0f
 
 
 #include "raylib/raylib.h"
