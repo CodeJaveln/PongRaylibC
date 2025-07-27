@@ -1,5 +1,6 @@
 #include "raylib/raylib.h"
 #include "update.h"
+#include "render.h"
 
 int main() {
     const int screenWidth = 800, screenHeight = 450;
@@ -13,7 +14,7 @@ int main() {
     while (!WindowShouldClose()) {
         Update(&gameState);
         
-        //Render(&gameState);
+        Render(&gameState);
     }
 
     CloseWindow();
