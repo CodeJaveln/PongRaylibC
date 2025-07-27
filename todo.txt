@@ -1,0 +1,51 @@
+Steg 1:
+Installera MSYS2 (msys2.org och allt default)
+
+Steg 2:
+installera gcc och make i MSYS2 mingw64
+
+Kommandon:
+pacman -Syu
+pacman -Su
+pacman -S make
+pacman -S mingw-w64-x86_64-gcc
+
+Steg 3:
+vscode integrated terminal (ändra settings.json)
+
+specifikt:
+ctrl + shift + p, "Preferences: Open User Settings (JSON)"
+"terminal.integrated.profiles.windows": {
+    "PowerShell": {
+      "source": "PowerShell",
+      "icon": "terminal-powershell"
+    },
+    "Command Prompt": {
+      "path": [
+        "${env:windir}\Sysnative\cmd.exe",
+        "${env:windir}\System32\cmd.exe"
+      ],
+      "args": [],
+      "icon": "terminal-cmd"
+    },
+    "Git Bash": {
+      "source": "Git Bash"
+    },
+    "MSYS2": {
+      "path": "C:\msys64\usr\bin\bash.exe",
+      "args": [
+        "--login",
+        "-i"
+      ],
+      "env": {
+        "MSYSTEM": "MINGW64",
+        "CHERE_INVOKING": "1"
+      }
+    }
+  },
+
+Steg 5:
+Klona Pong in i lämplig folder.
+
+Steg 6:
+testa make
