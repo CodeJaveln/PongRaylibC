@@ -5,7 +5,7 @@
 
 #define PLAYER_SPEED 200
 
-void Bounce(GameState *gamestate, bool xAxis){
+static void Bounce(GameState *gamestate, bool xAxis){
     if(xAxis){
         gamestate->ball.velocity.x *= -1;
     }
