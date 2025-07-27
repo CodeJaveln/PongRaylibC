@@ -1,5 +1,8 @@
 #ifndef TYPES_H
 #define TYPES_H
+#define PLAYER_HEIGHT 30
+#define PLAYER_WIDTH 10
+
 
 #include "raylib/raylib.h"
 
