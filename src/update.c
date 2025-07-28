@@ -2,7 +2,6 @@
 #include "raylib/raylib.h"
 #include "raylib/raymath.h"
 
-
 #define PLAYER_SPEED 200
 
 static void Bounce(GameState *gamestate, bool xAxis){
@@ -15,7 +14,6 @@ static void Bounce(GameState *gamestate, bool xAxis){
 }
 
 void Update(GameState *gameState){
-
 
     float dt = GetFrameTime();
     Player *player1 = &gameState->player1;
@@ -50,7 +48,12 @@ void Update(GameState *gameState){
         Bounce(gameState, true);
     }
 
-    if(ball->position.x <= GetScreenWidth() * PLAYER_OFFSET + PLAYER_WIDTH && ball->position.y < player1->position.y + PLAYER_HEIGHT && ball->position.y - BALL_SIZE > player1->position.y && ball->velocity.x < 0)
+    if(ball->position.x <= GetScreenWidth() * PLAYER_OFFSET + PLAYER_WIDTH && ball->position.y < player1->position.y + PLAYER_HEIGHT && ball->position.y + BALL_SIZE > player1->position.y && ball->velocity.x < 0)
+    {
+        Bounce(gameState, true);
+    }
+
+    if(ball->position.x >= GetScreenWidth() * (1 - PLAYER_OFFSET) - BALL_SIZE && ball->position.y < player2->position.y + PLAYER_HEIGHT && ball->position.y + BALL_SIZE > player2->position.y && ball->velocity.x > 0)
     {
         Bounce(gameState, true);
     }
