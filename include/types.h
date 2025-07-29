@@ -24,13 +24,12 @@ typedef struct {
     Vector2 velocity;
 } Ball;
 
-typedef struct
-{
+#define TIME_PAUSED 0.5f
+
+typedef struct {
    float time;
    bool active; 
 } Timer;
-
-
 
 typedef struct {
     Player player1;

@@ -2,6 +2,8 @@
 #include "ball.h"
 #include "raylib/raylib.h"
 #include "raylib/raymath.h"
+#include "types.h"
+#include <stdio.h>
 
 #define PLAYER_SPEED 200
 
@@ -24,11 +26,24 @@ static void BallOut(GameState *gamestate, bool p1Won){
     else{
         gamestate->player2.score++;
     }
+
+    gamestate->timer.active = true;
+    gamestate->timer.time = TIME_PAUSED;
 }
 
 void Update(GameState *gameState){
-
     float dt = GetFrameTime();
+
+    if (gameState->timer.active) {
+        gameState->timer.time -= dt;
+
+        if (gameState->timer.time <= 0.0f) {
+            gameState->timer.active = false;
+        }
+
+        return;
+    }
+
     Player *player1 = &gameState->player1;
     Player *player2 = &gameState->player2;
     Ball *ball = &gameState->ball;
