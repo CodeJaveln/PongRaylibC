@@ -1,15 +1,28 @@
 #include "update.h"
+#include "ball.h"
 #include "raylib/raylib.h"
 #include "raylib/raymath.h"
 
 #define PLAYER_SPEED 200
 
+//Ball bounces
 static void Bounce(GameState *gamestate, bool xAxis){
     if(xAxis){
         gamestate->ball.velocity.x *= -1;
     }
     else  {
         gamestate->ball.velocity.y *= -1;
+    }
+}
+
+static void BallOut(GameState *gamestate, bool p1Won){
+    BallReset(gamestate);
+
+    if(p1Won){
+        gamestate->player1.score++;
+    }
+    else{
+        gamestate->player2.score++;
     }
 }
 
@@ -40,20 +53,28 @@ void Update(GameState *gameState){
     ball->position.x += ball->velocity.x * dt;
     ball->position.y += ball->velocity.y * dt;
 
+    //Bounce when hitting ground or ceiling
     if(ball->position.y <= 0 || ball->position.y >= GetScreenHeight() - BALL_SIZE){
         Bounce(gameState, false);
     }
 
-    if(ball->position.x <= 0 || ball->position.x >= GetScreenWidth() - BALL_SIZE){
-        Bounce(gameState, true);
+    //Ball outside left
+    if(ball->position.x < -BALL_SIZE){
+        BallOut(gameState, 0);
     }
 
-    if(ball->position.x <= GetScreenWidth() * PLAYER_OFFSET + PLAYER_WIDTH && ball->position.y < player1->position.y + PLAYER_HEIGHT && ball->position.y + BALL_SIZE > player1->position.y && ball->velocity.x < 0)
+    //Ball outside right
+    if(ball->position.x > SCREEN_WIDTH){
+        BallOut(gameState, 1);
+    }
+
+    //Bouncing on paddles
+    if(ball->position.x <= GetScreenWidth() * PLAYER_OFFSET + PLAYER_WIDTH && ball->position.x >= GetScreenWidth() * PLAYER_OFFSET && ball->position.y < player1->position.y + PLAYER_HEIGHT && ball->position.y + BALL_SIZE > player1->position.y && ball->velocity.x < 0)
     {
         Bounce(gameState, true);
     }
 
-    if(ball->position.x >= GetScreenWidth() * (1 - PLAYER_OFFSET) - BALL_SIZE && ball->position.y < player2->position.y + PLAYER_HEIGHT && ball->position.y + BALL_SIZE > player2->position.y && ball->velocity.x > 0)
+    if(ball->position.x >= GetScreenWidth() * (1 - PLAYER_OFFSET) - PLAYER_WIDTH - BALL_SIZE && ball->position.x <= GetScreenWidth() * (1 - PLAYER_OFFSET) - PLAYER_WIDTH && ball->position.y < player2->position.y + PLAYER_HEIGHT && ball->position.y + BALL_SIZE > player2->position.y && ball->velocity.x > 0)
     {
         Bounce(gameState, true);
     }

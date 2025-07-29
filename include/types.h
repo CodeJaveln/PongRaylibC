@@ -8,12 +8,15 @@
 #define BALL_SIZE 10
 #define BALL_SPEED 150.0f
 
+#define SCREEN_HEIGHT 600
+#define SCREEN_WIDTH 800
 
 #include "raylib/raylib.h"
 
 typedef struct {
     Vector2 position;
     float velocity;
+    int score;
 } Player;
 
 typedef struct {
@@ -21,10 +24,19 @@ typedef struct {
     Vector2 velocity;
 } Ball;
 
+typedef struct
+{
+   float time;
+   bool active; 
+} Timer;
+
+
+
 typedef struct {
     Player player1;
     Player player2;
     Ball ball;
+    Timer timer;
 } GameState;
 
 #endif
